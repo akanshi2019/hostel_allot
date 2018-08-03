@@ -1,9 +1,13 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render, render_to_response
+from django.template.context_processors import csrf
+from django.views.decorators.csrf import csrf_protect
 from .forms import RegistrationForm
 
 def home(request):
     return render(request, 'accounts/home.html')
+
 
 
 def register(request):
