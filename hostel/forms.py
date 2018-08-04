@@ -2,10 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-#choices=[
-#    ('applicant','Applicant'),
- #   ('executive','Executive'),
-#]
+choices=[
+    ('','select your role'),
+    ('applicant','Applicant'),
+    ('executive','Executive'),
+]
 
 
 class RegistrationForm(UserCreationForm):
@@ -15,7 +16,7 @@ class RegistrationForm(UserCreationForm):
     course= forms.CharField(max_length=30, required=False)
     technology = forms.CharField(max_length=30, required=False)
     email = forms.EmailField(required=True)
- #   choice= forms.CharField(label=' Applicant or Executive',widget=forms.Select(choices=choices))
+    role= forms.CharField(label=' Applicant or Executive',widget=forms.Select(choices=choices))
 
     class Meta:
         model=User
@@ -27,7 +28,7 @@ class RegistrationForm(UserCreationForm):
             'course',
             'technology',
             'email',
-  #          'choice',
+            'role',
             'password1',
       ]
 
@@ -40,7 +41,7 @@ class RegistrationForm(UserCreationForm):
         user.course = self.cleaned_data['course']
         user.technology = self.cleaned_data['technology']
         user.email = self.cleaned_data['email']
-   #     user.applicant_or_executive = self.cleaned_data[' choice']
+        user.role = self.cleaned_data['role']
         if commit:
             user.save()
         return user

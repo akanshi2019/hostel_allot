@@ -5,25 +5,19 @@ from django.dispatch import receiver
 
 
 class UserProfile(models.Model):
-    #choices = [
-      #  ('applicant', 'Applicant'),
-     #   ('executive', 'Executive'),
-    #]
-    user=models.OneToOneField(User)
+    user=models.OneToOneField(User, on_delete=models.PROTECT)
     fathers_name=models.CharField(max_length=100,default='')
     course=models.CharField(max_length=20,default='')
     technology=models.CharField(max_length=40,default='')
-    #choice=models.CharField(max_length=20,default=0)
-@receiver(post_save,sender=User)
-def create_proile(sender,instance,created,**kwargs):
-    if created:
-        UserProfile.objects.created(user=instance)
+    role=models.CharField(max_length=20,default=0)
+
+    def __str__(self):
+        return self.user.first_name
 
 @receiver(post_save, sender=User)
-def save_user_profile(sender,instance,**kwargs):
-   instance.profile.save()
-    #if kwargs['created']:
-    #    user_profile=UserProfile.objects.create(user=kwargs['instance'])
-#post_save.connect(create_proile,sender=User)
+def create_user_profile(sender,instance,created,**kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
 
 
