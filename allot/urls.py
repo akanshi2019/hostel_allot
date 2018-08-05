@@ -21,5 +21,5 @@ from hostel import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/',include('hostel.urls')),
-
+    url(r'^applicant/', include('applicant.urls')),
 ]
