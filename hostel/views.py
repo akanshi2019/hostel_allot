@@ -7,7 +7,7 @@ from .forms import RegistrationForm
 
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    return render(request, 'hostel/home.html')
 
 
 
@@ -23,7 +23,6 @@ def register(request):
                 fathers_name = form.cleaned_data['fathers_name']
                 course = form.cleaned_data['course']
                 technology = form.cleaned_data['technology']
-                #email = form.cleaned_data['email']
                 role= form.cleaned_data['role']
                 user=User.objects.get(first_name=first_name)
                 up=UserProfile.objects.get(user=user)
@@ -38,4 +37,4 @@ def register(request):
         else:
             form = RegistrationForm()
             args = {'form': form}
-            return render(request,'accounts/reg_form.html',args)
+            return render(request,'hostel/reg_form.html',args)

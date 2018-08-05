@@ -7,14 +7,22 @@ choices=[
     ('applicant','Applicant'),
     ('executive','Executive'),
 ]
-
+branch=[
+    ('','----------'),
+    ('it','Information Technology'),
+    ('cs','computer science'),
+    ('me','mechanical'),
+    ('civil','civil'),
+    ('en','electronics'),
+    ('et','electrical'),
+]
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
     fathers_name = forms.CharField(max_length=30, required=False)
     course= forms.CharField(max_length=30, required=False)
-    technology = forms.CharField(max_length=30, required=False)
+    technology =forms.CharField(label='technology',widget=forms.Select(choices=branch))
     email = forms.EmailField(required=True)
     role= forms.CharField(label=' Applicant or Executive',widget=forms.Select(choices=choices))
 
