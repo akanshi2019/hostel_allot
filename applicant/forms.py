@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from applicant.models import allot
 
@@ -10,11 +11,12 @@ class NameForm(forms.Form):
         model = allot
         fields = [
             'your_name',
-
         ]
-    def save(self, commit=True):
-        user = super(NameForm, self).save(commit=False)
-        user.first_name = self.cleaned_data['your_name']
-        if commit:
-            user.save()
-        return user
+
+
+#def save(self, commit=True):
+ #   user = super(NameForm, self).save(commit=False)
+  #  user.first_name = self.cleaned_data['your_name']
+   # if commit:
+    #    user.save()
+    #return user
