@@ -1,4 +1,4 @@
 from django.contrib import admin
-from applicant.models import allot
+from applicant.models import Allot
 
-admin.site.register(allot)
+admin.site.register(Allot)

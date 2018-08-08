@@ -1,20 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
-from applicant.models import allot
-from .forms import NameForm
+from applicant.models import Allot
+from .forms import AlotForm
 
 def get_name(request):
     if request.method == 'POST':
-        form = NameForm(request.POST)
+        form = AlotForm(request.POST)
         if form.is_valid():
-            form.save()
-            your_name = form.cleaned_data['your_name']
-            user = allot.objects.get(your_name=your_name)
-            up = allot.objects.get(user=user)
-            up.your_name = your_name
-            up.save()
-            return HttpResponseRedirect('/thanks/')
+            allotment = form.save(commit=False)
+            allotment.save()
+            return render(request, 'hostel/home.html')
     else:
-        form = NameForm()
+        form = AlotForm()
     return render(request, 'hostel/name.html', {'form': form})

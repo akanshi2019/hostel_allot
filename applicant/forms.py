@@ -1,20 +1,14 @@
 from django import forms
+from django.contrib.auth.models import User
 
-from applicant.models import allot
+from applicant.models import Allot
 
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100,widget=forms.TimeInput(attrs={'class':'form-control','placeholder':'name',}))
+class AlotForm(forms.ModelForm):
 
     class Meta:
-        model = allot
+        model = Allot
         fields = [
-            'your_name',
-
+            'first_name',
         ]
-    def save(self, commit=True):
-        user = super(NameForm, self).save(commit=False)
-        user.first_name = self.cleaned_data['your_name']
-        if commit:
-            user.save()
-        return user
+
